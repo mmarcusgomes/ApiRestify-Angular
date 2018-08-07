@@ -1,45 +1,8 @@
-<!--form #clienteForm="ngForm" (ngSubmit)="onSubmit(clienteForm)">
-  <div class="form-group">
-    <label for="exampleInputEmail1">Nome </label>
-    <input type="text" class="form-control" id="inputNome" placeholder="Digite o  Nome">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputEmail1">CPF </label>
-    <input type="text" class="form-control" id="inputCPF" aria-describedby="emailHelp" placeholder="Digite o  CPF">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputEmail1">E-mail </label>
-    <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Digite o E-mail">
-  </div>
-
-  <button id="addInput" class="btn btn-default" type="submit" (click)="addInput()">+</button>
-  <div class="form-group">
-    <label>Telefone </label>
-    <div class="input-group">
-      <div class="form-group">
-        <input type="text" class="form-control" id="inputTelefone" placeholder="Digite o Telefone">
-      </div>
-    </div>
-    <div *ngFor="let in of input;let i = index">
-      <label for="exampleInputEmail1">Telefone </label>
-      <div class="input-group">
-        <div class="form-group">
-          <input type="text" class="form-control" id="inputTelefone{{i+1}}" placeholder="Digite o Telefone">
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <button type="submit" (click)="resetForm(clienteForm)" class="btn  btn-primary">Salvar</button>
-</form-->
-
-
-
 
 <form #clienteForm="ngForm" (ngSubmit)="onSubmit(clienteForm)">
   <div class="form-group" *ngIf="homeService.clienteSelecionado.id" >
       <label>ID </label>
-      <input  name="id" #id="ngModel"[(ngModel)]="homeService.clienteSelecionado.id" >
+      <input  name="id" #id="ngModel"[(ngModel)]="homeService.clienteSelecionado.id" readonly="true">
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Nome </label>
