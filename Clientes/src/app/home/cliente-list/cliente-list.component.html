@@ -1,0 +1,44 @@
+<!--table class="table table-sm table-hover">
+    <tr *ngFor="let cli of clientes.cliente">
+     
+            <td>{{cli.nome}} {{cli.email}}{{cli.cpf}}</td>
+
+        
+      
+        <td>
+            <div class="row">
+                <button (click)="editarCliente(cliente)">Edit</button>
+
+                <button (click)="deleteCliente(cliente.cpf)">Del</button>
+            </div>
+        </td>
+    </tr>
+</table-->
+
+
+<table class="table table-sm table-hover">
+    <tr *ngFor="let cli of homeService.clienteList?.cliente">
+     
+            <td>{{cli.nome}}-{{cli.email}}-{{cli.cpf}}</td>
+
+      
+            <td>
+                <a class="btn" (click)="editarCliente(cli)">
+                  <i >Edit</i>
+                </a>
+                ||
+                <a class="btn text-danger" (click)="deleteCliente(cli.id)">
+                  <i >Del</i>
+                </a>
+              </td>
+        
+      
+        <!--td>
+            <div class="row">
+                <button (click)="editarCliente(cliente)">Edit</button>
+
+                <button (click)="deleteCliente(cliente.cpf)">Del</button>
+            </div>
+        </td-->
+    </tr>
+</table>
