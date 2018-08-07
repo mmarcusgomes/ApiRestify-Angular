@@ -37,6 +37,10 @@
 
 
 <form #clienteForm="ngForm" (ngSubmit)="onSubmit(clienteForm)">
+  <div class="form-group" *ngIf="homeService.clienteSelecionado.id" >
+      <label>ID </label>
+      <input  name="id" #id="ngModel"[(ngModel)]="homeService.clienteSelecionado.id" >
+  </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Nome </label>
     <input type="text" class="form-control" name="nome" #nome="ngModel" [(ngModel)]="homeService.clienteSelecionado.nome" placeholder="Digite o  Nome"
@@ -62,7 +66,7 @@
     <div class="input-group">
       <div class="form-group">
         <input type="text" class="form-control" name="numtelefone" #numtelefone="ngModel" [(ngModel)]="homeService.clienteSelecionado.telefone"
-          placeholder="Digite o Telefone" required>
+          placeholder="Digite o Telefone" >
         <div class="validation-error" *ngIf="numtelefone.invalid && numtelefone.touched">O Telefone é obrigatório</div>
       </div>
     </div>

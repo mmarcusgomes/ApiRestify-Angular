@@ -24,11 +24,7 @@ export class ClienteListComponent implements OnInit {
     this.homeService.getClientes();
    // console.log(this.homeService)
 
-
   }
-
-
-
   editarCliente(cli:Cliente) {
 
     this.homeService.clienteSelecionado = Object.assign({}, cli);
@@ -38,11 +34,8 @@ export class ClienteListComponent implements OnInit {
     if (confirm('Deseja realmente apagar este cliente ?') == true) {
       this.homeService.deleteCliente(id)
       .subscribe(x => {
-        this.homeService.getClientes();
-        
+        this.homeService.getClientes();        
       })
     }
-
   }
-
 }

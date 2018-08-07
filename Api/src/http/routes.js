@@ -16,21 +16,24 @@ const routes = (server) => {
 
     server.post('/cliente', async (req, res, next) => {
 
-        const cliente = req.params      
-
+        const cliente = req.body
+        //console.log(cliente)
         try {
             /*await faz com que espere pelos resultados */
+            //console.log('teste')
             res.send(await db.clientes().save(cliente))
             next()
         } catch (error) {
+            console.log('error router')
             res.send(error)
             next()
         }
     })
 
     server.put('/cliente', async (req, res, next) => {
-       
-        const cliente = req.params
+
+        const cliente = req.body
+        // console.log(cliente)
         try {
             /*await faz com que espere pelos resultados */
             res.send(await db.clientes().update(cliente))
@@ -40,15 +43,16 @@ const routes = (server) => {
             next()
         }
     })
-    server.del('/cliente', async (req, res, next) => {
+    server.del('/cliente/:id', async (req, res, next) => {
         const { id } = req.params
+        console.log(id)
         try {
             /*await faz com que espere pelos resultados */
             res.send(await db.clientes().del(id))
             next()
         } catch (error) {
             res.send(error)
-            next() 
+            next()
         }
     })
 

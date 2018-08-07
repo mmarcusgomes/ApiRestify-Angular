@@ -26,14 +26,15 @@ export class FormComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    if(form.value ==null){
+    if(form.value.id ==null){
+      console.log(form.value)
      this.homeService.postClientes(form.value)
      .subscribe(dados=>{
        this.resetForm(form);
      })
     }else{
       
-      this.homeService.putCliente(form.value.cpf,form.value)
+      this.homeService.putCliente(form.value)
      .subscribe(dados=>{
        this.resetForm(form);
      })
