@@ -20,6 +20,7 @@ export class FormComponent implements OnInit {
 
   ngOnInit() {
     this.resetForm();
+    
   }
   addInput() {
     this.input.push({});
@@ -27,7 +28,7 @@ export class FormComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     if(form.value.id ==null){
-      console.log(form.value)
+     
      this.homeService.postClientes(form.value)
      .subscribe(dados=>{
        this.resetForm(form);
@@ -39,6 +40,7 @@ export class FormComponent implements OnInit {
        this.resetForm(form);
      })
     }
+    this.homeService.getClientes();
   }
 
 
