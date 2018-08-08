@@ -24,13 +24,17 @@ export class HomeService {
         var body = JSON.stringify(cli);
          /*let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });*/
+        console.log(body)
+        console.log('chegou ao POST')
         return this.http.post(`${API}/cliente`, body).pipe(map(x => x.json()));
     }
 
     putCliente(cli) {
         var body = JSON.stringify(cli);       
         /*let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });*/   
+        let options = new RequestOptions({ headers: headers });*/ 
+        console.log(body)  
+        console.log('chegou ao PUT')
         return this.http.put(`${API}/cliente` , body).pipe(map(x => x.json()));
     }
     deleteCliente(id) {

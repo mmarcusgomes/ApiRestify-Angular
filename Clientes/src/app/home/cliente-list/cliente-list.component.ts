@@ -14,7 +14,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ClienteListComponent implements OnInit {
 
-  clientes: Cliente[];
+  
 
 
   constructor(private homeService: HomeService) { }

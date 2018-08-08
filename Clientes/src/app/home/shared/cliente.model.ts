@@ -3,7 +3,7 @@ export interface Cliente{
     cpf: number
     nome:string
     email : string
-    telefone : number[] 
-    situacao: boolean
+    telefone : number[]
+    situacao: number
 
 }

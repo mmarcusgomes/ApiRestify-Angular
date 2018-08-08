@@ -1,51 +1,54 @@
-
 <form #clienteForm="ngForm" (ngSubmit)="onSubmit(clienteForm)">
-  <div class="form-group" *ngIf="homeService.clienteSelecionado.id" >
-      <label>ID </label>
-      <input  name="id" #id="ngModel"[(ngModel)]="homeService.clienteSelecionado.id" readonly="true">
+  <div class="form-group" *ngIf="homeService.clienteSelecionado.id">
+    <label>ID </label>
+    <input name="id" #id="ngModel" [(ngModel)]="homeService.clienteSelecionado.id" readonly="true">
   </div>
-  <div class="form-group">
+  <div class="form-group row">
     <label for="exampleInputEmail1">Nome </label>
     <input type="text" class="form-control" name="nome" #nome="ngModel" [(ngModel)]="homeService.clienteSelecionado.nome" placeholder="Digite o  Nome"
       required>
     <div class="validation-error" *ngIf="nome.invalid && nome.touched">O Nome é obrigatório</div>
   </div>
-  <div class="form-group">
+  <div class="form-group row">
     <label for="exampleInputEmail1">CPF </label>
     <input type="text" class="form-control" name="cpf" #cpf="ngModel" [(ngModel)]="homeService.clienteSelecionado.cpf" placeholder="Digite o  CPF"
       required>
     <div class="validation-error" *ngIf="cpf.invalid && cpf.touched">O CPF é obrigatório</div>
   </div>
-  <div class="form-group">
+  <div class="form-group row">
     <label for="exampleInputEmail1">E-mail </label>
     <input type="email" class="form-control" name="email" #email="ngModel" [(ngModel)]="homeService.clienteSelecionado.email"
       aria-describedby="emailHelp" placeholder="Digite o E-mail" required>
     <div class="validation-error" *ngIf="email.invalid && email.touched">O Email é obrigatório</div>
   </div>
-
-  <button id="addInput" class="btn btn-default" (click)="addInput()">+</button>
-  <div class="form-group">
-    <label>Telefone </label>
-    <div class="input-group">
-      <div class="form-group">
-        <input type="text" class="form-control" name="numtelefone" #numtelefone="ngModel" [(ngModel)]="homeService.clienteSelecionado.telefone"
-          placeholder="Digite o Telefone" >
-        <div class="validation-error" *ngIf="numtelefone.invalid && numtelefone.touched">O Telefone é obrigatório</div>
-      </div>
-    </div>
-    <div *ngFor="let in of input;let i = index">
-      <label for="exampleInputTelefone">Telefone </label>
-      <div class="input-group">
-        <div class="form-group">
-          <input type="text" class="form-control" id="inputTelefone{{i+1}}" placeholder="Digite o Telefone">
-          <div class="validation-error" *ngIf="numtelefone.invalid && numtelefone.touched">O Telefone é obrigatório</div>
-          <!--input type="text" class="form-control" name="Telefone({{i+1}})" #Telefone({{i+1}})="ngModel" [(ngModel)]="homeService.clienteSelecionado.Telefone({{i+1}})"
-            placeholder="Digite o Telefone"-->
-
-        </div>
-      </div>
-    </div>
+  <div>
+    <span>Selecione :</span>&nbsp;
+    <select name="situacao" #situacao="ngModel" [(ngModel)]="homeService.clienteSelecionado.situacao">
+    <option [(value)]="opt.value" *ngFor="let opt of options">{{opt.name}}</option>
+  </select>
   </div>
 
-  <button type="submit" class="btn btn-primary"[disabled]="!clienteForm.valid">Salvar</button>
+  
+
+
+  <div class="form-group">
+    
+      <label>Telefone </label>
+     <div class="row">
+        <input type="text" class="form-control col-sm-8" name="numtelefone" #numtelefone="ngModel"  (ngModel)="telefones" 
+          placeholder="Digite o Telefone" required> &nbsp;
+          <button class="btn btn-primary" (click)="telefonesArray(numtelefone.value)">Vincular Numero</button>
+        <div class="validation-error" *ngIf="numtelefone.invalid && numtelefone.touched">O Telefone é obrigatório</div>
+      </div>
+      
+    
+  </div>
+
+
+
+
+
+
+
+  <button type="submit" class="btn btn-primary" [disabled]="!clienteForm.valid">Salvar</button>
 </form>

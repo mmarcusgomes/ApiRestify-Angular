@@ -1,17 +1,18 @@
 <table class="table table-sm table-hover">
-    <tr *ngFor="let cli of homeService.clienteList?.cliente">
-     
-            <td>{{cli.nome}}-{{cli.email}}-{{cli.cpf}}</td>
+  <tr *ngFor="let cli of homeService.clienteList?.cliente">
 
-      
-            <td>
-                <a class="btn" (click)="editarCliente(cli)">
-                  <i >Edit</i>
-                </a>
-                ||
-                <a class="btn text-danger" (click)="deleteCliente(cli.id)">
-                  <i >Del</i>
-                </a>
-              </td>
-    </tr>
+    <td>Nome : {{cli.nome}} </td>
+    <td>E-mail : {{cli.email}}</td>
+    <td>CPF : {{cli.cpf}}</td>
+
+    <td>
+      <a class="btn" (click)="editarCliente(cli)">
+        <i>Edit</i>
+      </a>
+      ||
+      <a class="btn text-danger" (click)="deleteCliente(cli.id)">
+        <i>Del</i>
+      </a>
+    </td>
+  </tr>
 </table>

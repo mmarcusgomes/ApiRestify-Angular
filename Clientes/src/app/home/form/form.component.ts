@@ -13,35 +13,61 @@ import { Cliente } from '../shared/cliente.model';
 })
 export class FormComponent implements OnInit {
 
+  telefones: number[] = []
+  
+  options = [
+    { name: "Ativo", value: 1 },
+    { name: "Inativo", value: 0 }
+  ]
+  constructor(private homeService: HomeService) {
 
-  input: any[] = [];
-  constructor(private homeService: HomeService) { }
+  }
 
 
   ngOnInit() {
     this.resetForm();
-    
+
+
   }
-  addInput() {
-    this.input.push({});
+ 
+
+  telefonesArray(tel) {
+    this.telefones.push(tel)
+
   }
 
+  /*onSubmit(form) {
+    this.homeService.clienteSelecionado.telefone = this.telefones
+    console.log(this.homeService.clienteSelecionado)
+    
+  }*/
+
   onSubmit(form: NgForm) {
-    if(form.value.id ==null){
-     
-     this.homeService.postClientes(form.value)
-     .subscribe(dados=>{
-       this.resetForm(form);
-     })
-    }else{
-      
-      this.homeService.putCliente(form.value)
-     .subscribe(dados=>{
-       this.resetForm(form);
-     })
-     
+    this.homeService.clienteSelecionado.telefone = this.telefones
+
+    console.log(this.homeService.clienteSelecionado)
+    if (this.homeService.clienteSelecionado.telefone != null) {
+
+
+      if (form.value.id == null) {
+  
+        this.homeService.postClientes(this.homeService.clienteSelecionado)
+          .subscribe(dados => {
+            this.resetForm(form);
+          })
+      } else {
+  
+        this.homeService.putCliente(this.homeService.clienteSelecionado)
+          .subscribe(dados => {
+            this.resetForm(form);
+          })
+  
+  
+      }
+      this.homeService.getClientes();
+    } else {
+      alert("Vincule um numero de telefone ao cliente")
     }
-    this.homeService.getClientes();
   }
 
 
@@ -53,7 +79,7 @@ export class FormComponent implements OnInit {
       cpf: null,
       telefone: null,
       email: '',
-      situacao: false
+      situacao: null
 
     }
   }

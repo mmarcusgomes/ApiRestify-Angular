@@ -1,13 +1,15 @@
 
+//Separar os CRUDS? com o tempo é so fazer 
 
 
 
-const telefones = deps => {
-    return { 
-        /*all: () => {
+/*
+const clientes = deps => {
+    return {
+        all: () => {
 
             return new Promise((resolve, reject) => {
-                const { connection,errorHandler } = deps
+                const { connection, errorHandler } = deps
                 connection.query('SELECT * FROM cliente', (error, results) => {
                     if (error) {
                         errorHandler(error, 'Falhou ao listar os clientes', reject)
@@ -17,94 +19,100 @@ const telefones = deps => {
                 })
             })
 
-        },*/
-        save: (telefones) => {
-
-            var telefones = []
-               //console.log(cliente.numtelefone)
-               
-              var nome = cliente.nome
-              var cpf = cliente.cpf
-              var email = cliente.email
-              var cli =({nome,cpf,email})
-              //console.log(cliente)
-
-            /*var tel =  Object.keys(cliente).map(function(key) {
-                  if(key=='numtelefone'){
-                   telefones = cliente[key]
-                  }               
-            });*/
-            //console.log(tel)
-
-              /*for (var c in cliente) {
-                if (cliente.hasOwnProperty(c)) {
-                    if(c.numtelefone){
-                        console.log(c.numtelefone)
-                    }
-                }
-            }*/
-
-                
-              /*cliente.forEach(function (item, indice, array) {
-                 telefones[indice] = item.numtelefone
-                 console.log(telefones[indice])
-              });*/
-             //console.log(teste)
-           
+        },
+        save: (cliente) => {
 
 
+            cliente = JSON.parse(cliente)/*obj Javascript 
+
+
+
+            var nome = cliente.nome
+            var cpf = cliente.cpf
+            var email = cliente.email
+            var situacao = cliente.situacao
+            var cli = ({ nome, cpf, email, situacao })
+
+            return new Promise((resolve, reject) => {
+                cliente.telefone.forEach(numtelefone => {
+                    let clientecpf = cpf
+                    let tel = ({ clientecpf, numtelefone })
+                    const { connection, errorHandler } = deps
+
+                    connection.query('INSERT INTO cliente set ?', [cli], (error, results) => {
+                        if (error) {
+                            errorHandler(error, `Falhou ao salvar o cliente ${cli.nome} `, reject)
+
+                            return false;
+                        }
+                        resolve({ cliente: { cliente, id: results.insertId } })
+
+                        console.log("passou do cliente")
+                        connection.query('INSERT INTO telefone set ?', [tel], (error, results) => {
+                            if (error) {
+                                errorHandler(error, `Falhou ao salvar o(s) telefone(s) cliente ${cli.nome} `, reject)
+
+                                return false;
+                            }
+                            resolve({ cliente: { cliente, id: results.insertId } })
+                        })
+                    })
+                });
+            })
+
+            console.log("passou pelo telefone")
 
             return new Promise((resolve, reject) => {
                 const { connection, errorHandler } = deps
-                connection.query('INSERT INTO telefone set ?',[telefones], (error, results) => {
+                connection.query('INSERT INTO cliente set ?', [cli], (error, results) => {
                     if (error) {
                         errorHandler(error, `Falhou ao salvar o cliente ${cli.nome} `, reject)
-                        
+
                         return false;
                     }
-
                     resolve({ cliente: { cliente, id: results.insertId } })
-                    
-                })       
-             
-                /*connection.query('INSERT INTO telefone VALUES(?,?) ',[cliente.cpf,cliente.telefone], (error, results) => {
-                    if (error) {
-                        errorHandler(error, `Falhou ao salvar o telefone cliente ${cliente.nome} `, reject)
-                        
-                        return false;
-                    }
+                })
 
-                    resolve({ cliente: { cliente, id: results.insertId } })
-                
-                })*/
 
 
 
             })
+
+
+
         },
-        update: (cliente) => {           
+        update: (cliente) => {
+            cliente = JSON.parse(cliente)
+            console.log("chegou ao PUT")
+
+            var nome = cliente.nome
+            var cpf = cliente.cpf
+            var email = cliente.email
+            var situacao = cliente.situacao
+            var cli = ({ nome, cpf, email, situacao })
+
             return new Promise((resolve, reject) => {
                 const { connection, errorHandler } = deps
-                connection.query('UPDATE cliente SET ? WHERE id=?', [cliente, cliente.id], (error, results) => {
+                connection.query('UPDATE cliente SET ? WHERE id=?', [cli, cliente.id], (error, results) => {
                     if (error) {
                         errorHandler(error, `Falhou ao atualizar  o cliente ${cliente} `, reject)
                         return false;
                     }
                     resolve({ cliente: { cliente, id: results.insertId } })
                 })
-
             })
         },
         del: (id) => {
-            //console.log(id)
+
+
             return new Promise((resolve, reject) => {
                 const { connection, errorHandler } = deps
-                connection.query('DELETE FROM cliente  WHERE id=?', [ id], (error, results) => {
+                connection.query('DELETE FROM cliente  WHERE id=?', [id], (error, results) => {
                     if (error) {
                         errorHandler(error, `Falhou ao remover  o cliente ${cliente.id} `, reject)
                         return false;
                     }
-                    resolve({message:'Cliente removido com sucesso!' })
+                    resolve({ message: 'Cliente removido com sucesso!' })
                 })
 
             })
@@ -115,9 +123,9 @@ const telefones = deps => {
 }
 
 
-module.exports = telefones
+module.exports = clientes
 
-
+*/
 
 
 
