@@ -2,6 +2,7 @@ import { HomeService } from './../shared/home.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { Cliente } from '../shared/cliente.model';
+import { EventEmitter } from '../../../../node_modules/protractor';
 
 
 
@@ -19,6 +20,9 @@ export class FormComponent implements OnInit {
     { name: "Ativo", value: 1 },
     { name: "Inativo", value: 0 }
   ]
+ 
+
+
   constructor(private homeService: HomeService) {
 
   }
@@ -33,8 +37,12 @@ export class FormComponent implements OnInit {
 
   telefonesArray(tel) {
     this.telefones.push(tel)
+    console.log(this.telefones)
+    console.log('array tel')
 
   }
+
+  
 
   /*onSubmit(form) {
     this.homeService.clienteSelecionado.telefone = this.telefones

@@ -22,7 +22,8 @@ export class ClienteListComponent implements OnInit {
   ngOnInit() {
     // this.homeService.getClientes().subscribe(cli => this.clientes = cli) // Funcionando com o service padrao
     this.homeService.getClientes();
-   // console.log(this.homeService)
+   
+    
 
   }
   editarCliente(cli:Cliente) {
@@ -30,9 +31,11 @@ export class ClienteListComponent implements OnInit {
     this.homeService.clienteSelecionado = Object.assign({}, cli);
    
   }
-  deleteCliente(id) {
+  deleteCliente(cli) {
     if (confirm('Deseja realmente apagar este cliente ?') == true) {
-      this.homeService.deleteCliente(id)
+     // console.log(cli)
+      
+      this.homeService.deleteCliente(cli.cpf)
       .subscribe(x => {
         this.homeService.getClientes();        
       })

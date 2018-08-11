@@ -13,6 +13,7 @@ import { FormComponent } from './home/form/form.component';
 import { ClienteListComponent } from './home/cliente-list/cliente-list.component';
 
 import { HttpModule } from '@angular/http';
+import { ListaTelefonesComponent } from './lista-telefones/lista-telefones.component';
 
 
 
@@ -23,7 +24,8 @@ import { HttpModule } from '@angular/http';
     HeaderComponent,
     FormComponent,
     HomeComponent,
-    ClienteListComponent
+    ClienteListComponent,
+    ListaTelefonesComponent
   ],
   imports: [
     BrowserModule,

@@ -37,9 +37,11 @@ export class HomeService {
         console.log('chegou ao PUT')
         return this.http.put(`${API}/cliente` , body).pipe(map(x => x.json()));
     }
-    deleteCliente(id) {
-        console.log(id)
-        return this.http.delete(`${API}/cliente/` + id).pipe(map(x => x.json()));
+    deleteCliente(cpf) {
+        //var body = JSON.stringify(cli);
+        /*console.log(id)
+        console.log(body)*/
+        return this.http.delete(`${API}/cliente/`+cpf ).pipe(map(x => x.json()));
     }
 
 

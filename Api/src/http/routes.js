@@ -7,6 +7,7 @@ const routes = (server) => {
         try {
             /*await faz com que espere pelos resultados */
             res.send(await db.clientes().all())
+           // console.log(res)
             next()
         } catch (error) {
             res.send(error)
@@ -17,7 +18,7 @@ const routes = (server) => {
     server.post('/cliente', async (req, res, next) => {
 
         const cliente = req.body
-        //console.log(cliente)
+        console.log(cliente)
         try {
             /*await faz com que espere pelos resultados */
             //console.log('teste')
@@ -43,12 +44,14 @@ const routes = (server) => {
             next()
         }
     })
-    server.del('/cliente/:id', async (req, res, next) => {
-        const { id } = req.params
-        console.log(id)
+    server.del('/cliente/:cpf', async (req, res, next) => {
+        const cpf = req.params
+        //const cliente = req.body
+        //console.log(cliente)
+        console.log(cpf)
         try {
             /*await faz com que espere pelos resultados */
-            res.send(await db.clientes().del(id))
+            res.send(await db.clientes().del(cpf))
             next()
         } catch (error) {
             res.send(error)
