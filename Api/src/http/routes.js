@@ -7,7 +7,7 @@ const routes = (server) => {
         try {
             /*await faz com que espere pelos resultados */
             res.send(await db.clientes().all())
-           // console.log(res)
+            //console.log(res)
             next()
         } catch (error) {
             res.send(error)

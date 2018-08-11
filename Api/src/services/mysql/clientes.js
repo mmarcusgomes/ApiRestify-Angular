@@ -15,6 +15,7 @@ const clientes = deps => {
                         errorHandler(error, 'Falhou ao listar os clientes', reject)
                         return false;
                     }
+
                    
                     
                    
@@ -114,6 +115,7 @@ const clientes = deps => {
                         errorHandler(error, `Falhou ao atualizar  o cliente ${cliente} `, reject)
                         return false;
                     }
+                    
                     resolve({ cliente: { cliente, id: results.insertId } })
                 })
             })
@@ -125,7 +127,7 @@ const clientes = deps => {
             console.log(cliente)
             console.log("chegou ao del")
 
-            return new Promise((resolve, reject) => {
+            /*return new Promise((resolve, reject) => {
                 const { connection, errorHandler } = deps
                 connection.query('DELETE FROM cliente,telefone using cliente,telefone  WHERE cpf=? AND clientecpf=?', [cpf,cpf], (error, results) => {
                     if (error) {
@@ -135,12 +137,12 @@ const clientes = deps => {
                     resolve({ message: 'Cliente removido com sucesso!' })
                 })
 
-            })
+            })*/
 
            /*remover tudo se um cliente for removido */
-              /*return new Promise((resolve, reject) => {
+              return new Promise((resolve, reject) => {
                 const { connection, errorHandler } = deps
-                connection.query(' DELETE FROM cliente , telefone USING cliente , telefone WHERE  cliente.id=? AND clientecpf=?', [id,cpf], (error, results) => {
+                connection.query(' DELETE FROM cliente  WHERE  cliente.cpf=? ', [cpf], (error, results) => {
                     if (error) {
                         errorHandler(error, `Falhou ao remover  o cliente ${cliente.id} `, reject)
                         return false;
@@ -148,7 +150,7 @@ const clientes = deps => {
                     resolve({ message: 'Cliente removido com sucesso!' })
                 })
 
-            })*/
+            })
 
         },
 

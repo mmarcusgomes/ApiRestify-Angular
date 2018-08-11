@@ -3,16 +3,16 @@
 
 
 
-/*
-const clientes = deps => {
+
+/*const telefones = deps => {
     return {
         all: () => {
 
             return new Promise((resolve, reject) => {
                 const { connection, errorHandler } = deps
-                connection.query('SELECT * FROM cliente', (error, results) => {
+                connection.query('SELECT * FROM telefone', (error, results) => {
                     if (error) {
-                        errorHandler(error, 'Falhou ao listar os clientes', reject)
+                        errorHandler(error, 'Falhou ao listar os telefones', reject)
                         return false;
                     }
                     resolve({ cliente: results })
@@ -20,7 +20,7 @@ const clientes = deps => {
             })
 
         },
-        save: (cliente) => {
+        /*save: (cliente) => {
 
 
             cliente = JSON.parse(cliente)/*obj Javascript 
@@ -123,9 +123,9 @@ const clientes = deps => {
 }
 
 
-module.exports = clientes
+module.exports = telefones*/
 
-*/
+
 
 
 

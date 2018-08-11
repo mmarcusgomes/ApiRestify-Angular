@@ -16,4 +16,6 @@ Use `ng serve` no diretorio do projeto Angular para startar o servidor Angular. 
 
 ## Observações
 
-O botão de adicionar telefone cria um array para depois salvar no banco,preencha o numero de telefone clique em vincular e depois apague o numero e adicione um novo(esta assim por enquanto ate resolver um bug da nova vesão dos formularios)
+O botã ode vincular numero de telefone cria uma array para q quando for salavar ele envie em uma requisição tudo sobre o cliente, abaixo do botão será mostrado todo o array de telefones vinculados.
+
+O banco foi modificado para que Updates e Deletes sejam em cascata no MySQL

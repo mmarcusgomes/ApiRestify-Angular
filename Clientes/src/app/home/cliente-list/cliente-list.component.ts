@@ -22,6 +22,8 @@ export class ClienteListComponent implements OnInit {
   ngOnInit() {
     // this.homeService.getClientes().subscribe(cli => this.clientes = cli) // Funcionando com o service padrao
     this.homeService.getClientes();
+    
+   
    
     
 
