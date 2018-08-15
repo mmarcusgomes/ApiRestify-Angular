@@ -32,15 +32,13 @@ export class FormComponent implements OnInit {
       if (form.value.id == null) {
         this.homeService.postClientes(this.homeService.clienteSelecionado)
           .subscribe(() => {
-            this.resetForm(form);             //reseta formulario
-            this.telefones = null             // reseta o array quando salvar o cliente
+            this.resetForm(form);             //reseta formulario                   
             this.homeService.getClientes();   //atualiza a lista de clientes
           })
       } else {
         this.homeService.putCliente(this.homeService.clienteSelecionado)
           .subscribe(() => {
-            this.resetForm(form);             //reseta formulario
-            this.telefones = null             // reseta o array quando salvar o cliente
+            this.resetForm(form);             //reseta formulario                        
             this.homeService.getClientes();   //atualiza a lista de clientes
           })
       }
@@ -48,7 +46,8 @@ export class FormComponent implements OnInit {
     } else {
       alert("Vincule um numero de telefone ao cliente")
     }
-
+    
+    this.telefones=[]  //reseta o array
   }
   
 

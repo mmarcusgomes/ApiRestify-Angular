@@ -39,8 +39,8 @@
     <div class="row">
       <input type="text" class="col-sm-8" name="numtelefone" #numtelefone="ngModel" [(ngModel)]="homeService.clienteSelecionado.numtelefone" placeholder="Digite o Telefone"
         required> &nbsp;
-      <button class="btn btn-primary" (click)="telefonesArray(numtelefone.value)">Vincular Numero</button>
-      <div class="validation-error" *ngIf="numtelefone.invalid && numtelefone.touched || numtelefone==null ">O Telefone é obrigatório e não pode estar vazio</div>
+      <button class="btn btn-primary" [disabled]="numtelefone.value ==null" (click)="telefonesArray(numtelefone.value)">Vincular Numero</button>
+      <div class="validation-error"  *ngIf="numtelefone.invalid && numtelefone.touched || numtelefone==null ">O Telefone é obrigatório e não pode estar vazio</div>
     </div>
     <div class="col-sm-12 row">
       <app-lista-telefones [(telefones)]="telefones"></app-lista-telefones>
