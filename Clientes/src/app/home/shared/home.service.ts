@@ -1,11 +1,9 @@
-import { ErrorHandler } from '../../app.error-handler';
 import { API } from '../../app.api';
-import { Http, RequestMethod, RequestOptionsArgs, Headers, RequestOptions } from '@angular/http';
+import { Http } from '@angular/http';
 import { Injectable } from '../../../../node_modules/@angular/core';
-import { Observable, pipe } from '../../../../node_modules/rxjs';
 import { Cliente } from './cliente.model';
 
-import { map, filter, mergeMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class HomeService {
@@ -15,34 +13,20 @@ export class HomeService {
 
     constructor(private http: Http) { }
 
-    getClientes() {        
+    getClientes() {
         return this.http.get(`${API}/cliente`).pipe(map(response => response.json())).subscribe(x => this.clienteList = x)
+
     }
-
-
     postClientes(cli: Cliente) {
         var body = JSON.stringify(cli);
-         /*let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });*/
-        console.log(body)
-        console.log('chegou ao POST')
         return this.http.post(`${API}/cliente`, body).pipe(map(x => x.json()));
     }
 
     putCliente(cli) {
-        var body = JSON.stringify(cli);       
-        /*let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });*/ 
-        console.log(body)  
-        console.log('chegou ao PUT')
-        return this.http.put(`${API}/cliente` , body).pipe(map(x => x.json()));
+        var body = JSON.stringify(cli);
+        return this.http.put(`${API}/cliente`, body).pipe(map(x => x.json()));
     }
     deleteCliente(cpf) {
-        //var body = JSON.stringify(cli);
-        /*console.log(id)
-        console.log(body)*/
-        return this.http.delete(`${API}/cliente/`+cpf ).pipe(map(x => x.json()));
+        return this.http.delete(`${API}/cliente/` + cpf).pipe(map(x => x.json()));
     }
-
-
 } 

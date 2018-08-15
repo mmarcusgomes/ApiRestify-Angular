@@ -1,46 +1,37 @@
-<!--table class="table table-sm table-hover">
-  <tr *ngFor="let cli of homeService.clienteList?.cliente">
-
-    <td>Nome : {{cli.nome}} </td>
-    <td>E-mail : {{cli.email}}</td>
-    <td>CPF : {{cli.cpf}}</td>
-    <td *ngIf="cli.situacao == 0">Situação : Inativo</td>
-    <td *ngIf="cli.situacao == 1">Situação : Ativo</td>
-    <td >Telefones : {{cli.numtelefone}}</td>
-
-    <td>
-      <a class="btn" (click)="editarCliente(cli)">
-        <i>Edit</i>
-      </a>
-      ||
-      <a class="btn text-danger" (click)="deleteCliente(cli.id)">
-        <i>Del</i>
-      </a>
-    </td>
-  </tr>
-</table-->
-
-
 
 
 <table class="table table-sm table-hover">
-  <tr *ngFor="let cli of homeService.clienteList?.cliente">
-    
-    <td>Nome : {{cli.nome}} </td>
-    <td>E-mail : {{cli.email}}</td>
-    <td>CPF : {{cli.cpf}}</td>
-    <td *ngIf="cli.situacao == 0">Situação : Inativo</td>
-    <td *ngIf="cli.situacao == 1">Situação : Ativo</td>
-    <td >Telefones : {{cli.numtelefone}}</td>
-
-    <td>
-      <a class="btn" (click)="editarCliente(cli)">
-        <i>Edit</i>
-      </a>
-      ||
-      <a class="btn text-danger" (click)="deleteCliente(cli)">
-        <i>Del</i>
-      </a>
-    </td>
-  </tr>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>CPF</th>
+      <th>E-mail</th>
+      <th>Situação</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let cli of homeService.clienteList?.cliente">
+    <tr>
+      <td>{{cli.nome}}
+        <td>{{cli.cpf}}</td>
+        <td>{{cli.email}}</td>
+        <td *ngIf="cli.situacao == 0"> Inativo</td>
+        <td *ngIf="cli.situacao == 1"> Ativo</td>
+        <td>
+          <label *ngFor="let tel of homeService.clienteList?.telefones">
+            <td *ngIf="cli.cpf ==tel.clientecpf">Telefone : {{tel.numtelefone}}
+            </td>
+          </label>
+        </td>
+        <td>
+          <a class="btn" (click)="editarCliente(cli)">
+            <i>Edit</i>
+          </a>
+        </td>
+        <td>
+          <a class="btn text-danger" (click)="deleteCliente(cli)">
+            <i>Del</i>
+          </a>
+        </td>
+    </tr>
+  </tbody>
 </table>

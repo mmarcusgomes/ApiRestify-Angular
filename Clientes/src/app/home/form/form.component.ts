@@ -1,10 +1,6 @@
 import { HomeService } from './../shared/home.service';
-import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
-import { Cliente } from '../shared/cliente.model';
-import { EventEmitter } from '../../../../node_modules/protractor';
-
-
+import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -15,69 +11,46 @@ import { EventEmitter } from '../../../../node_modules/protractor';
 export class FormComponent implements OnInit {
 
   telefones: number[] = []
-  
+
   options = [
     { name: "Ativo", value: 1 },
     { name: "Inativo", value: 0 }
   ]
- 
-
-
-  constructor(private homeService: HomeService) {
-
-  }
-
-
+  constructor(private homeService: HomeService) { }
   ngOnInit() {
     this.resetForm();
-
-
   }
- 
 
   telefonesArray(tel) {
-    this.telefones.push(tel)
-    console.log(this.telefones)
-    console.log('array tel')
-
+    this.telefones.push(tel)/*cria array de telefones para que depois possam ser adicionados o cliente e ao banco */
+    this.homeService.clienteSelecionado.numtelefone =null
   }
 
-  
-
-  /*onSubmit(form) {
-    this.homeService.clienteSelecionado.telefone = this.telefones
-    console.log(this.homeService.clienteSelecionado)
-    
-  }*/
-
   onSubmit(form: NgForm) {
-    this.homeService.clienteSelecionado.telefone = this.telefones
-
-    console.log(this.homeService.clienteSelecionado)
-    if (this.homeService.clienteSelecionado.telefone != null) {
-
-
+    this.homeService.clienteSelecionado.numtelefone = this.telefones
+    if (this.homeService.clienteSelecionado.numtelefone != null) {
       if (form.value.id == null) {
-  
         this.homeService.postClientes(this.homeService.clienteSelecionado)
-          .subscribe(dados => {
-            this.resetForm(form);
+          .subscribe(() => {
+            this.resetForm(form);             //reseta formulario
+            this.telefones = null             // reseta o array quando salvar o cliente
+            this.homeService.getClientes();   //atualiza a lista de clientes
           })
       } else {
-  
         this.homeService.putCliente(this.homeService.clienteSelecionado)
-          .subscribe(dados => {
-            this.resetForm(form);
+          .subscribe(() => {
+            this.resetForm(form);             //reseta formulario
+            this.telefones = null             // reseta o array quando salvar o cliente
+            this.homeService.getClientes();   //atualiza a lista de clientes
           })
-  
-  
       }
       this.homeService.getClientes();
     } else {
       alert("Vincule um numero de telefone ao cliente")
     }
-  }
 
+  }
+  
 
   resetForm(form?: NgForm) {
     if (form != null)
@@ -85,12 +58,9 @@ export class FormComponent implements OnInit {
     this.homeService.clienteSelecionado = {
       nome: '',
       cpf: null,
-      telefone: null,
+      numtelefone: null,
       email: '',
       situacao: null
-
     }
   }
-
-
 }

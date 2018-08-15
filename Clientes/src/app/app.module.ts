@@ -1,3 +1,4 @@
+import { ListaTelefonesComponent } from './lista-telefones/lista-telefones.component';
 import { HomeService } from './home/shared/home.service';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -13,7 +14,7 @@ import { FormComponent } from './home/form/form.component';
 import { ClienteListComponent } from './home/cliente-list/cliente-list.component';
 
 import { HttpModule } from '@angular/http';
-import { ListaTelefonesComponent } from './lista-telefones/lista-telefones.component';
+
 
 
 

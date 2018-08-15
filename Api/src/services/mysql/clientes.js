@@ -3,66 +3,35 @@ const clientes = deps => {
     return {
         all: () => {
 
-
-  
-
-
-         
             return new Promise((resolve, reject) => {
                 const { connection, errorHandler } = deps
-                connection.query('SELECT distinct c.id as id,c.nome as nome,c.cpf as cpf,c.email as email,c.situacao as situacao,t.numtelefone as numtelefone FROM cliente c INNER JOIN telefone  t ON cpf = t.clientecpf', (error, results) => {
+                connection.query('SELECT distinct c.id as id,c.nome as nome,c.cpf as cpf,c.email as email,c.situacao as situacao FROM cliente c', (error, results) => {
                     if (error) {
                         errorHandler(error, 'Falhou ao listar os clientes', reject)
                         return false;
                     }
-
-                   
-                    
-                   
-                   /*var obj =JSON.stringify(results)
-                   console.log(obj)
-                   var t = JSON.parse(obj)
-                   console.log(t)*/
-                  /*obj.forEach(e => {
-                       console.log('foreach')
-                       if(e.cpf==results.cpf && contador==0){
-                           console.log('primeiro if')
-                       body = {cpf :e.cpf,nome :e.nome}
-                       console.log(contador)
-                       contador++;
-                       }if(e.cpf==results.cpf && contador==1){
-                        body.numtelefone.push(e.numtelefone)
-                       }
-                   });
-                   /*console.log("teste do results")
-                   console.log(body)
-                   console.log("teste do results")
-                   console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')*/
-                    resolve({ cliente: results })
+                    connection.query('SELECT t.id AS idtelefone, t.clientecpf AS clientecpf,t.numtelefone as numtelefone FROM telefone t ', (error, resTel) => {
+                        if (error) {
+                            errorHandler(error, 'Falhou ao listar os telefones', reject)
+                            return false;
+                        }
+                        //cria uma resposta com dois objetos que podem ser usados separadamente , poderia ser feito um atributo array dentro de cliente
+                        resolve({ cliente: results, telefones: resTel })
+                    })                    
                 })
             })
-
-
-
-
-         
-
         },
 
-
-       
-
-        
         save: (cliente) => {
 
 
             cliente = JSON.parse(cliente)/*obj Javascript */
 
-            var nome = cliente.nome
-            var cpf = cliente.cpf
-            var email = cliente.email
-            var situacao = cliente.situacao
-            var cli = ({ nome, cpf, email, situacao })
+            var nome = cliente.nome                         //            
+            var cpf = cliente.cpf                           //           
+            var email = cliente.email                       //    foi separado assim para poder inserir primeiro o cliente e depois os telefones      
+            var situacao = cliente.situacao                 //    se fosse outro CRUD para telefones poderia ter outra requisição para inserir no banco 
+            var cli = ({ nome, cpf, email, situacao })      //    
 
 
 
@@ -77,14 +46,14 @@ const clientes = deps => {
                         return false;
                     }
                     resolve({ cliente: { cliente, id: results.insertId } })
-                    cliente.telefone.forEach(numtelefone => {
-                        let clientecpf = cpf
-                        let tel = ({ clientecpf, numtelefone })
-                        console.log("passou do cliente")
+                    cliente.numtelefone.forEach(numtelefone => {
+
+                        let clientecpf = cpf                        // pega para salvar na foreign key da tabela de telefones
+                        let tel = ({ clientecpf, numtelefone })     //
+
                         connection.query('INSERT INTO telefone set ?', [tel], (error, results) => {
                             if (error) {
                                 errorHandler(error, `Falhou ao salvar o(s) telefone(s) cliente ${cli.nome} `, reject)
-
                                 return false;
                             }
                             resolve({ cliente: { cliente, id: results.insertId } })
@@ -92,21 +61,16 @@ const clientes = deps => {
                     })
                 });
             })
-
-            console.log("passou pelo telefone")
-
-            
-
         },
         update: (cliente) => {
             cliente = JSON.parse(cliente)
-            console.log("chegou ao PUT")
 
             var nome = cliente.nome
-            var cpf = cliente.cpf
-            var email = cliente.email
-            var situacao = cliente.situacao
-            var cli = ({ nome, cpf, email, situacao })
+            var cpf = cliente.cpf                      // segue a mesma logica que o insert
+            var email = cliente.email                  // so que para fazer o Update dos telefones teria que se pegar ID,clientecpf e numtelefone para atualizar(tentar fazer um outro momento).
+            var situacao = cliente.situacao            // Lembrete: não esquece das validações para ver se terá uma atualização de numero
+            var cli = ({ nome, cpf, email, situacao }) // cria o objeto para ser salvo no update sem os telefones
+            
 
             return new Promise((resolve, reject) => {
                 const { connection, errorHandler } = deps
@@ -115,32 +79,17 @@ const clientes = deps => {
                         errorHandler(error, `Falhou ao atualizar  o cliente ${cliente} `, reject)
                         return false;
                     }
-                    
                     resolve({ cliente: { cliente, id: results.insertId } })
                 })
             })
         },
         del: (cliente) => {
 
-            var id = cliente.id 
+            var id = cliente.id
             var cpf = cliente.cpf
-            console.log(cliente)
-            console.log("chegou ao del")
-
-            /*return new Promise((resolve, reject) => {
-                const { connection, errorHandler } = deps
-                connection.query('DELETE FROM cliente,telefone using cliente,telefone  WHERE cpf=? AND clientecpf=?', [cpf,cpf], (error, results) => {
-                    if (error) {
-                        errorHandler(error, `Falhou ao remover  o cliente ${cliente.id} `, reject)
-                        return false;
-                    }
-                    resolve({ message: 'Cliente removido com sucesso!' })
-                })
-
-            })*/
-
-           /*remover tudo se um cliente for removido */
-              return new Promise((resolve, reject) => {
+          
+            //como no banco os updates e deletes são em cascade , deletar o cliente apga todos os numeros, não foi passado restrição se era esse o objetivo ou era pra manter o histórico
+            return new Promise((resolve, reject) => {
                 const { connection, errorHandler } = deps
                 connection.query(' DELETE FROM cliente  WHERE  cliente.cpf=? ', [cpf], (error, results) => {
                     if (error) {
@@ -151,9 +100,7 @@ const clientes = deps => {
                 })
 
             })
-
         },
-
     }
 }
 

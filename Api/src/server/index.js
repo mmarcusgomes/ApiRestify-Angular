@@ -7,7 +7,7 @@ const cors = require('./cors')
 
 server.pre(cors.preflight)
 server.use(cors.actual)
-server.use(restify.plugins.bodyParser())
+server.use(restify.plugins.bodyParser())/* pegar os dados que vem no corpo da requisição */
 
 
 

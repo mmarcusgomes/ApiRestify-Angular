@@ -20,8 +20,7 @@ const routes = (server) => {
         const cliente = req.body
         console.log(cliente)
         try {
-            /*await faz com que espere pelos resultados */
-            //console.log('teste')
+            /*await faz com que espere pelos resultados */            
             res.send(await db.clientes().save(cliente))
             next()
         } catch (error) {
@@ -46,8 +45,7 @@ const routes = (server) => {
     })
     server.del('/cliente/:cpf', async (req, res, next) => {
         const cpf = req.params
-        //const cliente = req.body
-        //console.log(cliente)
+      
         console.log(cpf)
         try {
             /*await faz com que espere pelos resultados */
